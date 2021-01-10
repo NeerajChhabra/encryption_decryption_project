@@ -107,7 +107,8 @@ def adminFunc(user, Admin, users=None):
         l -> logout user
     '''
     ch = input(
-        'D -> to delete a user, U-> to change the password of user, A -> to add another user, C-> change admin password, l -> logout, i -> print users').lower()
+        'D -> to delete a user, U-> to change the password of user, A -> to add another user, C-> change admin '
+        'password, l -> logout, i -> print users').lower()
     print('     ')
     if ch == 'd':
         print(list(users.keys()))
@@ -141,7 +142,7 @@ def adminFunc(user, Admin, users=None):
         print((f'Admin logged out'))
         user = input('Enter Username --> ')
         pawd = input('Enter your password -->')
-        authorize(user, pawd, Admin, users)
+        authorize(user, pawd,key ,  Admin, users)
     elif ch == 'c':
         opawd = getpass('Enter Old password:')
         if opawd == Admin['Admin']:
@@ -197,7 +198,7 @@ def userFunc(user, pawd, users, key, newObj):
         print((f'{user} logged out'))
         user = input('Enter Username')
         pawd = getpass('Enter your password')
-        authorize(user, pawd, Admin, users)
+        authorize(user, pawd, key,  Admin, users)
     else:
         print('Invalid Entry, choose another option ')
 
@@ -210,11 +211,4 @@ if __name__ == "__main__":
     Admin = {'Admin': 'admin'}
     user = input('Please enter your username')
     pawd = getpass('Password:')
-    if user == 'Admin':
-        authorize(user, pawd, key, Admin, users)
-    else:
-        if user not in users:
-            user = input('Enter Username --> ')
-            pawd = input('Enter your password -->')
-        else:
-            authorize(user, pawd, key, Admin, users)
+    authorize(user, pawd, key, Admin, users)
